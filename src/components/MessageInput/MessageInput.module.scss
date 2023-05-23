@@ -1,0 +1,22 @@
+.wrapper {
+  width: calc(100% - 40px);
+  margin: 20px;
+  height: 40px;
+  border-radius: 10px;
+  border: solid 1px #ccc;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.input {
+  width: calc(100% - 20px);
+  margin: 0 20px;
+}
+
+.icon {
+  width: 40px;
+  color: #757575;
+  cursor: pointer;
+}
