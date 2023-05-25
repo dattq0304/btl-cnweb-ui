@@ -2,12 +2,14 @@
 import classNames from "classnames/bind";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import styles from "./Chat.module.scss";
 import Sidebar from "../../components/Sidebar";
 import Header from "../../components/Header";
 import MessageInput from "../../components/MessageInput";
-import Message from "../../components/Message"
+import Message from "../../components/Message";
+import ProfileSetting from "../../components/ProfileSetting";
 
 const cx = classNames.bind(styles);
 
@@ -16,7 +18,12 @@ function Chat() {
   // const [channelDetails, setChannelDetails] = useState(null);
   // const [channelMessages, setChannelMessages] = useState([]);
   const [sidebarWidth, setSidebarWidth] = useState(240);
-  const [isResizing, setIsResizing] = useState(false);4
+  const [isResizing, setIsResizing] = useState(false);
+  const showProfileSetting = useSelector(state => state.profileSettings); 
+
+  useEffect(() => {
+    console.log(showProfileSetting);
+  }, [showProfileSetting]);
 
   // Get channel data (messages, users, details, ...)
   // useEffect(() => {
@@ -104,7 +111,6 @@ function Chat() {
     },
     // Add more chat messages here
   ];
-  
 
   // Setups for adjusting sidebar width
   const handleMouseDown = (event) => {
@@ -131,33 +137,39 @@ function Chat() {
 
   return (
     <div className={cx('wrapper')}>
-      <Sidebar width={sidebarWidth} />
-      <div className={cx('content')}>
-        <div
-          className={cx('resize')}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
-          onMouseUp={handleMouseUp}
-        />
-        <Header />
-        <div className={cx('main')}>
-          <div className={cx('messages')}>
-            {channelMessages.map(({ message, timestamp, user, userImage }) => (
-              <Message
-                message={message}
-                timestamp={timestamp}
-                user={user}
-                userImage={userImage}
-                key={timestamp}
-              />
-            ))}
-          </div>
-          <MessageInput 
-            className={cx('message-input')}
-            channelName={channelDetails.name}
+      <Header />
+      <div className={cx('container')}>
+        <Sidebar width={sidebarWidth} />
+        <div className={cx('content')}>
+          <div
+            className={cx('resize')}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            onMouseUp={handleMouseUp}
           />
+          <div className={cx('main')}>
+            <div className={cx('channel-name')}>
+              <p>{channelDetails.name}</p>
+            </div>
+            <div className={cx('messages')}>
+              {channelMessages.map(({ message, timestamp, user, userImage }) => (
+                <Message
+                  message={message}
+                  timestamp={timestamp}
+                  user={user}
+                  userImage={userImage}
+                  key={timestamp}
+                />
+              ))}
+            </div>
+            <MessageInput
+              className={cx('message-input')}
+              channelName={channelDetails.name}
+            />
+          </div>
         </div>
+        {showProfileSetting && <ProfileSetting />}
       </div>
     </div>
   );

@@ -31,9 +31,8 @@ function Sidebar({ width }) {
   return (
     <div className={cx('wrapper')} style={{ width: width }}>
       <div className={cx("spread")}></div>
-
       <div className={cx('title')}>
-        <h2>GROUP 10</h2>
+        <h3>GROUP 10</h3>
       </div>
       <div className={cx("spread")}></div>
       <div className={cx('list')}>

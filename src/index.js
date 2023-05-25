@@ -4,17 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GlobalStyles from './components/GlobalStyles';
-import { StateProvider } from "./StateProvider";
-import reducer, { initialState } from "./reducer";
+import { Provider } from 'react-redux';
+import store from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
-  <StateProvider initialState={initialState} reducer={reducer}>
+  <Provider store={store}>
     <GlobalStyles>
       <App />
     </GlobalStyles>
-  </StateProvider>
+  </Provider>
   // {/* </React.StrictMode> */}
 );
 

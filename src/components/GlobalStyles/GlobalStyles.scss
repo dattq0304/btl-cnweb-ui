@@ -5,9 +5,9 @@
   --white: #fff;
   --background-light: #fff;
   --background-dark: #2B2D31;
-  --text-color-light: #e5e6ee;
-  --border-color: #2a2a31;
-
+  --border-color: #848484;
+  --secondary: #4A154B;
+  --primary: #791984;
   --header-height: 40px;
 
   --font-family: "ProximaNova", sans-serif;
@@ -28,7 +28,7 @@ body {
   font-size: 1.6rem;
   line-height: 1.5;
   text-rendering: optimizespeed;
-  color: var(--white);
+  color: var(--black);
   overflow-y: overlay;
   background-color: var(----background-light);
   min-width: 780px;
