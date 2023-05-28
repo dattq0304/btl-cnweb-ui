@@ -9,9 +9,11 @@ import DirectMessageOption from "./DirectMessageOption";
 
 const cx = classNames.bind(styles);
 
-function Sidebar({ width }) {
+function Sidebar() {
   const [showChannels, setShowChannels] = useState(true);
   const [showDirectMessages, setShowDirectMessages] = useState(true);
+  const [width, setWidth] = useState(300);
+  const [isResizing, setIsResizing] = useState(false);
 
   // Fake channels 
   const channels = [
@@ -28,8 +30,41 @@ function Sidebar({ width }) {
     }
   ];
 
+  // Setups for adjusting sidebar width
+  const handleMouseDown = (event) => {
+    event.preventDefault();
+    event.target.classList.add(cx('resize-active'));
+    setIsResizing(true);
+  };
+
+  const handleMouseMove = (event) => {
+    if (isResizing) {
+      setWidth(event.clientX);
+      console.log('mouseMove', event.clientX);
+    }
+  };
+
+  const handleMouseLeave = (event) => {
+    event.target.classList.remove(cx('resize-active'));
+    setIsResizing(false);
+  };
+
+  const handleMouseUp = (event) => {
+    setIsResizing(false);
+    event.target.classList.remove(cx('resize-active'));
+  };
+
   return (
     <div className={cx('wrapper')} style={{ width: width }}>
+      <div
+        className={cx("resize-container")}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        onMouseUp={handleMouseUp}
+      >
+        <div className={cx("resize")}></div>
+      </div>
       <div className={cx("spread")}></div>
       <div className={cx('title')}>
         <h3>GROUP 10</h3>

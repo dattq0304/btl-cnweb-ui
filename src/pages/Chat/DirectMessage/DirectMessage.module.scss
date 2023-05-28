@@ -1,0 +1,96 @@
+.wrapper {
+  height: 100%;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  height: calc(100vh - var(--header-height));
+  display: flex;
+}
+
+.content {
+  display: flex;
+  position: relative;
+}
+
+.resize {
+  position: absolute;
+  left: 0;
+  width: 6px;
+  height: calc(100vh - var(--header-height));
+  transform: translateX(-50%);
+  background-color: transparent;
+  cursor: w-resize;
+
+  &.resize-wide {
+    width: 400px;
+  }
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  flex-direction: column;
+  color: var(--black);
+}
+
+.channel-name {
+  width: 100%;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  p {
+    margin-left: 20px;
+  }
+
+  &::after {
+    position: absolute;
+    content: "";
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--border-color);
+  }
+}
+
+.messages {
+  height: calc(100% - var(--header-height) - 90px);
+  overflow-y: scroll;
+  /* width */
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #e2e2e2;
+    border-radius: 4px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #a7a7a7;
+  }
+}
+
+// .message-input {
+//   position: fixed;
+//   bottom: 0;
+//   left: 0;
+// }
